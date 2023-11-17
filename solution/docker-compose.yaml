@@ -8,4 +8,13 @@ services:
     env_file:
       - ./env
     volumes:
-      - /root/csvserver/inputFile:/csvserver/inputdata
+      - ./inputFile:/csvserver/inputdata
+
+  prometheus:
+    image: prom/prometheus:v2.22.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - /root/csvserver/solution/prometheus.yaml:/etc/prometheus/prometheus.yaml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yaml'
